@@ -34,9 +34,9 @@ jobs:
       # Run dotnet build and publish
       - name: dotnet build and publish
         run: |
-          dotnet restore ${{CSPROJ}}
-          dotnet build ${{CSPROJ}} -c Release
-          dotnet publish ${{CSPROJ}} -c Release --output ${{ github.workspace}}/publish
+          dotnet restore ${{ env.CSPROJ }}
+          dotnet build ${{ env.CSPROJ }} -c Release
+          dotnet publish ${{ env.CSPROJ }} -c Release --output ${{ github.workspace}}/publish
 
       - name: Verify publish output
         run: |
