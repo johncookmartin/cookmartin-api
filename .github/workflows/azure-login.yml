@@ -10,6 +10,7 @@ env:
   AZURE_WEBAPP_NAME: asp-cookmartin
   AZURE_WEBAPP_PACKAGE_PATH: '.'
   DOTNET_VERSION: '10.0.x'
+  CSPROJ: CookMartin.API/CookMartin.API.csproj
 
 jobs:
   build:
@@ -33,16 +34,20 @@ jobs:
       # Run dotnet build and publish
       - name: dotnet build and publish
         run: |
-          dotnet restore
-          dotnet build --configuration Release
-          dotnet publish -c Release --property:PublishDir='${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/publish'
+          dotnet restore ${{CSPROJ}}
+          dotnet build ${{CSPROJ}} -c Release
+          dotnet publish ${{CSPROJ}} -c Release --output ${{ github.workspace}}/publish
 
-      # Deploy to Azure Web apps
-      - name: 'Run Azure webapp deploy action using publish profile credentials'
+      - name: Verify publish output
+        run: |
+          ls -la ${{ github.workspace }}/publish
+          find ${{ github.workspace }}/publich -maxdepth 2 -type f | head -n 50
+
+      - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/publish'
+          package: '${{ github.workspace }}/publish'
 
       - name: logout
         run: |
