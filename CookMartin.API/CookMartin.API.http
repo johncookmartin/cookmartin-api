@@ -1,0 +1,6 @@
+@CookMartin.API_HostAddress = http://localhost:5126
+
+GET {{CookMartin.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
