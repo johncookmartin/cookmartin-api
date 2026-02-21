@@ -10,7 +10,7 @@ env:
   AZURE_WEBAPP_NAME: asp-cookmartin
   AZURE_WEBAPP_PACKAGE_PATH: '.'
   DOTNET_VERSION: '10.0.x'
-  CSPROJ: CookMartin.API/CookMartin.API.csproj
+  CSPROJ: 'CookMartin.API/CookMartin.API.csproj'
 
 jobs:
   build:
