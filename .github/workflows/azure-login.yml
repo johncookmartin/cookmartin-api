@@ -1,4 +1,4 @@
-name: .NET Core
+name: .NET Core CI/CD
 
 on:
   push:
@@ -13,7 +13,7 @@ env:
   AZURE_WEBAPP_NAME: asp-cookmartin
   AZURE_WEBAPP_PACKAGE_PATH: '.'
   DOTNET_VERSION: '10.0.x'
-  CSPROJ: 'CookMartin.API/CookMartin.API.csproj'
+  API_PROJECT_PATH: 'CookMartin.API/CookMartin.API.csproj'
 
 jobs:
   build:
@@ -37,14 +37,14 @@ jobs:
       # Run dotnet build and publish
       - name: dotnet build and publish
         run: |
-          dotnet restore ${{ env.CSPROJ }}
-          dotnet build ${{ env.CSPROJ }} -c Release
-          dotnet publish ${{ env.CSPROJ }} -c Release --output ${{ github.workspace}}/publish
+          dotnet restore ${{ env.API_PROJECT_PATH }}
+          dotnet build ${{ env.API_PROJECT_PATH }} -c Release
+          dotnet publish ${{ env.API_PROJECT_PATH }} -c Release --output ${{ github.workspace}}/publish
 
       - name: Verify publish output
         run: |
           ls -la ${{ github.workspace }}/publish
-          find ${{ github.workspace }}/publich -maxdepth 2 -type f | head -n 50
+          find ${{ github.workspace }}/publish -maxdepth 2 -type f | head -n 50
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
