@@ -9,7 +9,7 @@ namespace CookMartin.Blob;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddServices<TMigrationAssemblyMarker>(this IServiceCollection services, IConfiguration config)
+    public static IServiceCollection AddBlobServices(this IServiceCollection services, IConfiguration config)
     {
         var blobStorageUri = config["AzureBlob:Uri"];
         if (string.IsNullOrEmpty(blobStorageUri))
@@ -24,13 +24,6 @@ public static class DependencyInjection
         services.AddSingleton(blobServiceClient);
 
         List<string> blobs = config.GetSection("AzureBlob:Blobs").Get<List<string>>() ?? [];
-
-        if (blobs.Count == 0)
-        {
-            blobs = blobServiceClient.GetBlobContainers()
-                .Select(container => container.Name)
-                .ToList();
-        }
 
         foreach (string blob in blobs)
         {
