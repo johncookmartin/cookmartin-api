@@ -416,3 +416,6 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Don't include Cli Tester for local dev testing
+/CookMartin.CliTester/
