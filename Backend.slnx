@@ -1,5 +1,4 @@
 <Solution>
   <Project Path="CookMartin.API/CookMartin.API.csproj" />
   <Project Path="CookMartin.Blob/CookMartin.Blob.csproj" Id="18971b91-231b-4f41-8041-a98d665f377a" />
-  <Project Path="CookMartin.CliTester/CookMartin.CliTester.csproj" Id="4121d640-3c68-4e23-b728-f386553d1ddd" />
 </Solution>
