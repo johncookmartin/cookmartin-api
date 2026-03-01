@@ -3,5 +3,5 @@
 public interface IBlobService
 {
     Task<Stream> StreamAsync(string fileName);
-    Task<(string Url, string Path)> UploadAsync(string fileName, Stream fileStream);
+    Task<(string Url, string Path)> UploadReadablePdfAsync(string fileName, Stream fileStream);
 }

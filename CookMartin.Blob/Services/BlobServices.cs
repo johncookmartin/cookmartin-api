@@ -1,4 +1,5 @@
 ﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using CookMartin.Blob.Services.Interfaces;
 
 namespace CookMartin.Blob.Services;
@@ -11,10 +12,22 @@ public class BlobServices : IBlobService
         _containerClient = blobServiceClient.GetBlobContainerClient(containerName);
     }
 
-    public async Task<(string Url, string Path)> UploadAsync(string fileName, Stream fileStream)
+    public async Task<(string Url, string Path)> UploadReadablePdfAsync(string fileName, Stream fileStream)
     {
         var blob = _containerClient.GetBlobClient(fileName);
-        await blob.UploadAsync(fileStream, overwrite: true);
+
+        var uploadOptions = new BlobUploadOptions
+        {
+            HttpHeaders = new BlobHttpHeaders
+            {
+                ContentType = "application/pdf",
+                ContentDisposition = "inline"
+            },
+            Conditions = null
+        };
+
+
+        await blob.UploadAsync(fileStream, uploadOptions);
 
         string blobUrl = blob.Uri.ToString();
         string blobPath = blob.Name;

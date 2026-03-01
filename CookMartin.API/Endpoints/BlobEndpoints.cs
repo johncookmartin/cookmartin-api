@@ -7,7 +7,7 @@ public static class BlobEndpoints
 {
     public static void MapBlobEndpoints(this WebApplication app)
     {
-        app.MapPost("/api/blob/upload", async (
+        app.MapPost("/api/blob/upload/pdf", async (
             IFormFile file,
             [FromQuery] string path,
             [FromKeyedServices("public")] IBlobService blobService) =>
@@ -25,7 +25,7 @@ public static class BlobEndpoints
             try
             {
                 using var stream = file.OpenReadStream();
-                var (url, blobPath) = await blobService.UploadAsync(path, stream);
+                var (url, blobPath) = await blobService.UploadReadablePdfAsync(path, stream);
 
                 return Results.Ok(new { ok = true, url, path = blobPath });
             }
@@ -44,7 +44,7 @@ public static class BlobEndpoints
         })
         .RequireAuthorization()
         .DisableAntiforgery()
-        .WithName("UploadBlob")
+        .WithName("UploadPdfBlob")
         .WithTags("Blob Storage");
     }
 }
