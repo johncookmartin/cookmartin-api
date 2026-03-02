@@ -28,7 +28,7 @@ public static class BlobEndpoints
             IFormFile file,
             [FromKeyedServices("public")] IBlobService blobService) =>
         {
-            return await UploadPdfAsync(file, "john/John_Cook-Martin_Resume.pdf", blobService);
+            return await UploadPdfAsync(file, "john/John_Cook-Martin_Resume.pdf", blobService, generateQrCode: true);
         })
         .RequireAuthorization()
         .DisableAntiforgery()
@@ -39,7 +39,7 @@ public static class BlobEndpoints
             IFormFile file,
             [FromKeyedServices("public")] IBlobService blobService) =>
         {
-            return await UploadPdfAsync(file, "jacquie/Jacquie_Cook-Martin_Resume.pdf", blobService);
+            return await UploadPdfAsync(file, "jacquie/Jacquie_Cook-Martin_Resume.pdf", blobService, generateQrCode: true);
         })
         .RequireAuthorization()
         .DisableAntiforgery()
@@ -47,7 +47,7 @@ public static class BlobEndpoints
         .WithTags("Blob Storage");
     }
 
-    private static async Task<IResult> UploadPdfAsync(IFormFile file, string path, IBlobService blobService)
+    private static async Task<IResult> UploadPdfAsync(IFormFile file, string path, IBlobService blobService, bool generateQrCode = false)
     {
         if (file == null || file.Length == 0)
         {
@@ -62,9 +62,17 @@ public static class BlobEndpoints
         try
         {
             using var stream = file.OpenReadStream();
-            var (url, blobPath) = await blobService.UploadReadablePdfAsync(path, stream);
 
-            return Results.Ok(new { ok = true, url, path = blobPath });
+            if (generateQrCode)
+            {
+                var (url, blobPath, qrCodeBase64) = await blobService.UploadReadablePdfAsync(path, stream, generateQrCode: true);
+                return Results.Ok(new { ok = true, url, path = blobPath, qrCode = qrCodeBase64 });
+            }
+            else
+            {
+                var (url, blobPath) = await blobService.UploadReadablePdfAsync(path, stream);
+                return Results.Ok(new { ok = true, url, path = blobPath });
+            }
         }
         catch (Azure.RequestFailedException ex) when (ex.Status == 401 || ex.Status == 403)
         {
