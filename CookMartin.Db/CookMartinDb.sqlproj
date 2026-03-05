@@ -11,8 +11,8 @@
     <OutputType>Database</OutputType>
     <RootPath>
     </RootPath>
-    <RootNamespace>NoteCardDb</RootNamespace>
-    <AssemblyName>NoteCardDb</AssemblyName>
+    <RootNamespace>CookMartin.Db</RootNamespace>
+    <AssemblyName>CookMartin.Db</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
