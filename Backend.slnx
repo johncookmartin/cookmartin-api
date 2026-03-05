@@ -1,6 +1,8 @@
 <Solution>
   <Project Path="CookMartin.API/CookMartin.API.csproj" />
   <Project Path="CookMartin.Blob/CookMartin.Blob.csproj" Id="18971b91-231b-4f41-8041-a98d665f377a" />
+  <Project Path="CookMartin.Data/CookMartin.Data.csproj" Id="ce4c2a3c-7f41-4773-abb6-23cee8052987" />
+  <Project Path="CookMartin.NoteCard/CookMartin.NoteCard.csproj" Id="4d16835e-96b4-44b5-9872-9af0fb0cb63b" />
   <Project Path="NoteCardDb/CookMartinDb.sqlproj" Id="805ea222-671e-42d4-a5e2-303d09721c8a">
     <Build />
     <Deploy />
