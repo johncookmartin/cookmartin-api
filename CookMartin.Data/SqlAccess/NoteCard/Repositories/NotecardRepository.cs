@@ -1,5 +1,5 @@
+using CookMartin.Data.Interfaces;
 using CookMartin.Data.Models.NoteCard;
-using CookMartin.Data.SqlAccess.Interfaces;
 using CookMartin.Data.SqlAccess.NoteCard.Interfaces;
 using Dapper;
 
@@ -7,14 +7,13 @@ namespace CookMartin.Data.SqlAccess.NoteCard.Repositories;
 
 public class NotecardRepository : INotecardRepository
 {
-    private readonly ICookMartinDataAccess _dataAccess;
+    private readonly IReadDb _readDb;
 
-    public NotecardRepository(ICookMartinDataAccess dataAccess)
+    public NotecardRepository(IReadDb readDb)
     {
-        _dataAccess = dataAccess;
+        _readDb = readDb;
     }
-
-    public async Task<int> CreateAsync(CreateNotecardDto dto)
+    public async Task<int> CreateAsync(IWriteDb writeDb, CreateNotecardDto dto)
     {
         var parameters = new DynamicParameters();
         parameters.Add("@CollectionId", dto.CollectionId);
@@ -22,7 +21,7 @@ public class NotecardRepository : INotecardRepository
         parameters.Add("@BackDescription", dto.BackDescription);
         parameters.Add("@NotecardId", dbType: System.Data.DbType.Int32, direction: System.Data.ParameterDirection.Output);
 
-        var result = await _dataAccess.QueryDataAsync<dynamic, DynamicParameters>(
+        var result = await writeDb.QueryAsync<dynamic, DynamicParameters>(
             "note.stp_CreateNotecard",
             parameters);
 
@@ -33,7 +32,7 @@ public class NotecardRepository : INotecardRepository
     {
         var parameters = new { CollectionId = collectionId };
 
-        return await _dataAccess.QueryDataAsync<NotecardDto, object>(
+        return await _readDb.QueryAsync<NotecardDto, object>(
             "note.stp_GetNotecardsByCollection",
             parameters);
     }
@@ -42,14 +41,14 @@ public class NotecardRepository : INotecardRepository
     {
         var parameters = new { NotecardId = notecardId };
 
-        var result = await _dataAccess.QueryDataAsync<NotecardDto, object>(
+        var result = await _readDb.QueryAsync<NotecardDto, object>(
             "note.stp_GetNotecardById",
             parameters);
 
         return result.FirstOrDefault();
     }
 
-    public async Task<int> UpdateAsync(UpdateNotecardDto dto)
+    public async Task<int> UpdateAsync(IWriteDb writeDb, UpdateNotecardDto dto)
     {
         var parameters = new
         {
@@ -58,18 +57,18 @@ public class NotecardRepository : INotecardRepository
             BackDescription = dto.BackDescription
         };
 
-        var result = await _dataAccess.QueryDataAsync<dynamic, object>(
+        var result = await writeDb.QueryAsync<dynamic, object>(
             "note.stp_UpdateNotecard",
             parameters);
 
         return result.FirstOrDefault()?.RowsAffected ?? 0;
     }
 
-    public async Task<int> DeleteAsync(int notecardId)
+    public async Task<int> DeleteAsync(IWriteDb writeDb, int notecardId)
     {
         var parameters = new { NotecardId = notecardId };
 
-        var result = await _dataAccess.QueryDataAsync<dynamic, object>(
+        var result = await writeDb.QueryAsync<dynamic, object>(
             "note.stp_DeleteNotecard",
             parameters);
 

@@ -1,5 +1,5 @@
-﻿using CookMartin.Data.SqlAccess;
-using CookMartin.Data.SqlAccess.Interfaces;
+﻿using CookMartin.Data.Interfaces;
+using CookMartin.Data.SqlAccess;
 using CookMartin.Data.SqlAccess.NoteCard.Interfaces;
 using CookMartin.Data.SqlAccess.NoteCard.Repositories;
 using Microsoft.Extensions.Configuration;
@@ -11,8 +11,10 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddDbService(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<ICookMartinUnitOfWork, CookMartinSqlUnitOfWork>();
-        services.AddScoped<ICookMartinDataAccess, CookMartinSqlDataAccess>();
+        services.AddScoped<IConnectionFactory, SqlConnectionFactory>();
+        services.AddScoped<IUnitOfWorkFactory, SqlUnitOfWorkFactory>();
+        services.AddScoped<IReadDb, SqlReadDb>();
+        services.AddScoped<ITransactionRunner, SqlTransactionRunner>();
 
         services.AddScoped<ICollectionRepository, CollectionRepository>();
         services.AddScoped<INotecardRepository, NotecardRepository>();

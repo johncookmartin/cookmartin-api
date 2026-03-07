@@ -1,13 +1,12 @@
 ﻿using System.Data;
 
-namespace CookMartin.Data.SqlAccess.Interfaces;
+namespace CookMartin.Data.Interfaces;
 
-public interface ICookMartinUnitOfWork
+public interface IUnitOfWork : IDisposable
 {
     IDbConnection Connection { get; }
     IDbTransaction Transaction { get; }
 
     void Commit();
-    void Dispose();
     void Rollback();
 }

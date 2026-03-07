@@ -1,0 +1,12 @@
+using CookMartin.Data.Models.NoteCard;
+
+namespace CookMartin.NoteCard.Services.Interfaces;
+
+public interface ICollectionService
+{
+    Task<CollectionDto> CreateCollectionAsync(CreateCollectionDto dto);
+    Task<CollectionDto?> GetCollectionByIdAsync(int collectionId);
+    Task<IEnumerable<CollectionDto>> GetCollectionsByUserAsync(string userId);
+    Task<bool> UpdateCollectionAsync(int collectionId, UpdateCollectionDto dto);
+    Task<bool> DeleteCollectionAsync(int collectionId);
+}

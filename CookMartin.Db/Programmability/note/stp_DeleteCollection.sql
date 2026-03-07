@@ -9,5 +9,10 @@ BEGIN
         [UpdatedDate] = GETUTCDATE()
     WHERE [CollectionId] = @CollectionId;
 
+    UPDATE [note].[Notecards]
+    SET [IsDeleted] = 1,
+        [UpdatedDate] = GETUTCDATE()
+    WHERE [CollectionId] = @CollectionId;
+
     SELECT @@ROWCOUNT AS RowsAffected;
 END

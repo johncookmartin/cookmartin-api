@@ -16,6 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CookMartin.Blob\CookMartin.Blob.csproj" />
+    <ProjectReference Include="..\CookMartin.Data\CookMartin.Data.csproj" />
+    <ProjectReference Include="..\CookMartin.NoteCard\CookMartin.NoteCard.csproj" />
   </ItemGroup>
 
 </Project>

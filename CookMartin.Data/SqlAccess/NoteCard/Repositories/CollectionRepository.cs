@@ -1,5 +1,5 @@
+using CookMartin.Data.Interfaces;
 using CookMartin.Data.Models.NoteCard;
-using CookMartin.Data.SqlAccess.Interfaces;
 using CookMartin.Data.SqlAccess.NoteCard.Interfaces;
 using Dapper;
 
@@ -7,21 +7,21 @@ namespace CookMartin.Data.SqlAccess.NoteCard.Repositories;
 
 public class CollectionRepository : ICollectionRepository
 {
-    private readonly ICookMartinDataAccess _dataAccess;
+    private readonly IReadDb _readDb;
 
-    public CollectionRepository(ICookMartinDataAccess dataAccess)
+    public CollectionRepository(IReadDb readDb)
     {
-        _dataAccess = dataAccess;
+        _readDb = readDb;
     }
 
-    public async Task<int> CreateAsync(CreateCollectionDto dto)
+    public async Task<int> CreateAsync(IWriteDb writeDb, CreateCollectionDto dto)
     {
         var parameters = new DynamicParameters();
         parameters.Add("@UserId", dto.UserId);
         parameters.Add("@Name", dto.Name);
         parameters.Add("@CollectionId", dbType: System.Data.DbType.Int32, direction: System.Data.ParameterDirection.Output);
 
-        var result = await _dataAccess.QueryDataAsync<dynamic, DynamicParameters>(
+        var result = await writeDb.QueryAsync<dynamic, DynamicParameters>(
             "note.stp_CreateCollection",
             parameters);
 
@@ -32,7 +32,7 @@ public class CollectionRepository : ICollectionRepository
     {
         var parameters = new { UserId = userId };
 
-        return await _dataAccess.QueryDataAsync<CollectionDto, object>(
+        return await _readDb.QueryAsync<CollectionDto, object>(
             "note.stp_GetCollectionsByUser",
             parameters);
     }
@@ -41,14 +41,14 @@ public class CollectionRepository : ICollectionRepository
     {
         var parameters = new { CollectionId = collectionId };
 
-        var result = await _dataAccess.QueryDataAsync<CollectionDto, object>(
+        var result = await _readDb.QueryAsync<CollectionDto, object>(
             "note.stp_GetCollectionById",
             parameters);
 
         return result.FirstOrDefault();
     }
 
-    public async Task<int> UpdateAsync(UpdateCollectionDto dto)
+    public async Task<int> UpdateAsync(IWriteDb writeDb, UpdateCollectionDto dto)
     {
         var parameters = new
         {
@@ -56,18 +56,18 @@ public class CollectionRepository : ICollectionRepository
             Name = dto.Name
         };
 
-        var result = await _dataAccess.QueryDataAsync<dynamic, object>(
+        var result = await writeDb.QueryAsync<dynamic, object>(
             "note.stp_UpdateCollection",
             parameters);
 
         return result.FirstOrDefault()?.RowsAffected ?? 0;
     }
 
-    public async Task<int> DeleteAsync(int collectionId)
+    public async Task<int> DeleteAsync(IWriteDb writeDb, int collectionId)
     {
         var parameters = new { CollectionId = collectionId };
 
-        var result = await _dataAccess.QueryDataAsync<dynamic, object>(
+        var result = await writeDb.QueryAsync<dynamic, object>(
             "note.stp_DeleteCollection",
             parameters);
 

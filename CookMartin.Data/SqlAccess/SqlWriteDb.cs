@@ -1,19 +1,19 @@
-﻿using CookMartin.Data.SqlAccess.Interfaces;
+﻿using CookMartin.Data.Interfaces;
 using Dapper;
 using System.Data;
 
 namespace CookMartin.Data.SqlAccess;
 
-public class CookMartinSqlDataAccess : ICookMartinDataAccess
+public class SqlWriteDb : IWriteDb
 {
-    private readonly ICookMartinUnitOfWork _uow;
+    private readonly IUnitOfWork _uow;
 
-    public CookMartinSqlDataAccess(ICookMartinUnitOfWork uow)
+    public SqlWriteDb(IUnitOfWork uow)
     {
         _uow = uow;
     }
 
-    public async Task<IEnumerable<T>> QueryDataAsync<T, U>(
+    public async Task<IEnumerable<T>> QueryAsync<T, U>(
         string queryString,
         U parameters,
         CommandType commandType = CommandType.StoredProcedure)
@@ -25,7 +25,7 @@ public class CookMartinSqlDataAccess : ICookMartinDataAccess
             commandType: commandType);
     }
 
-    public async Task ExecuteDataAsync<T>(
+    public async Task ExecuteAsync<T>(
         string queryString,
         T parameters,
         CommandType commandType = CommandType.StoredProcedure)

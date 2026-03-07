@@ -1,5 +1,7 @@
 using CookMartin.API.Endpoints;
 using CookMartin.Blob;
+using CookMartin.Data;
+using CookMartin.NoteCard;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Microsoft.OpenApi;
@@ -12,6 +14,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 
+builder.Services.AddDbService(builder.Configuration);
+builder.Services.AddNoteCardServices();
 builder.Services.AddBlobServices(builder.Configuration);
 
 builder.Services.AddCors(options =>
