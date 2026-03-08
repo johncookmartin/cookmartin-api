@@ -8,7 +8,7 @@ BEGIN
     UPDATE [note].[QuizInstances]
     SET [IsCorrect] = @IsCorrect,
         [AnsweredDate] = GETUTCDATE()
-    WHERE [QuizInstanceId] = @QuizInstanceId;
+    WHERE [QuizInstanceId] = @QuizInstanceId AND [AnsweredDate] IS NULL;
 
     SELECT @@ROWCOUNT AS RowsAffected;
 END

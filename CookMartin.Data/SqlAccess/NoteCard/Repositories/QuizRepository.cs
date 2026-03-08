@@ -25,11 +25,11 @@ public class QuizRepository : IQuizRepository
         return parameters.Get<int>("@QuizId");
     }
 
-    public async Task<IEnumerable<QuizInstanceDto>> GetInstancesByIdAsync(int instanceId)
+    public async Task<IEnumerable<QuizInstanceDto>> GetInstancesByIdAsync(int quizId)
     {
         var parameters = new DynamicParameters();
-        parameters.Add("@QuizInstanceId", instanceId);
-        var result = await _readDb.QueryAsync<QuizInstanceDto, dynamic>("note.stp_GetQuizInstancesById", parameters);
+        parameters.Add("@QuizId", quizId);
+        var result = await _readDb.QueryAsync<QuizInstanceDto, dynamic>("note.stp_GetQuizInstancesByQuiz", parameters);
         return result;
     }
 
