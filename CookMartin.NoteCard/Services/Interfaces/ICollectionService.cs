@@ -1,4 +1,4 @@
-using CookMartin.Data.Models.NoteCard;
+using CookMartin.Data.Models.NoteCard.Collection;
 
 namespace CookMartin.NoteCard.Services.Interfaces;
 

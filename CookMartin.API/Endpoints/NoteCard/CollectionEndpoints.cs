@@ -1,5 +1,6 @@
 using CookMartin.API.Models.NoteCard;
-using CookMartin.Data.Models.NoteCard;
+using CookMartin.Data.Models.NoteCard.Collection;
+using CookMartin.Data.Models.NoteCard.Notecard;
 using CookMartin.NoteCard.Services.Interfaces;
 using Microsoft.Data.SqlClient;
 using System.Security.Claims;

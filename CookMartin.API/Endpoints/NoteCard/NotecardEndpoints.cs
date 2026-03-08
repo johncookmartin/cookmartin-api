@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using CookMartin.Data.Models.NoteCard;
+using CookMartin.Data.Models.NoteCard.Notecard;
 using CookMartin.NoteCard.Services.Interfaces;
 
 namespace CookMartin.API.Endpoints.NoteCard;
