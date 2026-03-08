@@ -7,6 +7,7 @@ namespace CookMartin.NoteCard.Services;
 
 public class NotecardService : INotecardService
 {
+    private readonly Random _rng = new Random();
     private readonly INotecardRepository _repository;
     private readonly IReadDb _readDb;
     private readonly ITransactionRunner _transactionRunner;
@@ -56,5 +57,14 @@ public class NotecardService : INotecardService
             return rowsAffected > 0;
 
         });
+    }
+
+    public async Task<QuizNotecardDto?> GetNextNoteCardDtoAsync(int quizId)
+    {
+        var notecards = await _repository.GetNotecardsByQuizIdAsync(quizId);
+        if (notecards == null) return null;
+
+        var nextNotecard = notecards.ElementAt(_rng.Next(notecards.Count()));
+        return nextNotecard;
     }
 }

@@ -10,4 +10,5 @@ public interface INotecardRepository
     Task<NotecardDto?> GetByIdAsync(int notecardId);
     Task<int> UpdateAsync(IWriteDb writeDb, UpdateNotecardDto dto);
     Task<int> DeleteAsync(IWriteDb writeDb, int notecardId);
+    Task<IEnumerable<QuizNotecardDto>> GetNotecardsByQuizIdAsync(int quizId);
 }

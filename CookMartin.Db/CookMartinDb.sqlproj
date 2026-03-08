@@ -85,6 +85,7 @@
     <Build Include="Programmability\note\stp_RecordQuizAnswer.sql" />
     <Build Include="Programmability\note\stp_UpdateCollection.sql" />
     <Build Include="Programmability\note\stp_UpdateNoteCard.sql" />
+    <Build Include="Programmability\note\stp_GetNotecardsByQuizId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cookmartin-db-dev.publish.xml" />

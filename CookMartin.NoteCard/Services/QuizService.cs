@@ -4,7 +4,7 @@ using CookMartin.Data.SqlAccess.NoteCard.Repositories;
 
 namespace CookMartin.NoteCard.Services;
 
-public class QuizService
+public class QuizService : IQuizService
 {
     private readonly IQuizRepository _repository;
     private readonly ITransactionRunner _transactionRunner;
@@ -15,19 +15,17 @@ public class QuizService
         _transactionRunner = transactionRunner;
     }
 
-    public async Task<IEnumerable<QuizInstanceDto>> CreateQuizAsync(CreateQuizDto dto)
+    public async Task<int> CreateQuizAsync(CreateQuizDto dto)
     {
-        var quizId = await _transactionRunner.ExecuteAsync(async writeDb =>
+        return await _transactionRunner.ExecuteAsync(async writeDb =>
         {
             return await _repository.CreateAsync(writeDb, dto);
         });
-        var quizInstances = await _repository.GetInstancesByIdAsync(quizId);
-        return quizInstances ?? throw new InvalidOperationException("Failed to create quiz");
     }
 
-    public async Task<IEnumerable<QuizInstanceDto>> RecordAnswerAsnyc(RecordQuizAnswerDto dto, int quizId)
+    public async Task<bool> RecordAnswerAsnyc(RecordQuizAnswerDto dto)
     {
-        return await _transactionRunner.ExecuteAsync(async writeDb =>
+        var isComplete = await _transactionRunner.ExecuteAsync(async writeDb =>
         {
             var rowsAffected = await _repository.RecordAnswerAsync(writeDb, dto);
             bool success = rowsAffected > 0;
@@ -36,16 +34,18 @@ public class QuizService
                 throw new InvalidOperationException("Failed to record answer");
             }
 
-            IEnumerable<QuizInstanceDto> quizInstances = await _repository.GetInstancesByIdAsync(quizId);
+            IEnumerable<QuizInstanceDto> quizInstances = await _repository.GetInstancesByIdAsync(dto.quizId);
             int remainingQuestions = quizInstances.Count(i => i.AnsweredDate == null);
 
             if (remainingQuestions < 1)
             {
-                int score = await _repository.CompleteAsync(writeDb, quizId);
+                int score = await _repository.CompleteAsync(writeDb, dto.quizId);
+                return true;
             }
 
-            return quizInstances;
+            return false;
         });
+        return isComplete;
     }
 
     public async Task<IEnumerable<QuizInstanceDto>> GetInstancesByIdAsync(int quizId)

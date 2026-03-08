@@ -74,4 +74,12 @@ public class NotecardRepository : INotecardRepository
 
         return result.FirstOrDefault()?.RowsAffected ?? 0;
     }
+
+    public async Task<IEnumerable<QuizNotecardDto>> GetNotecardsByQuizIdAsync(int quizId)
+    {
+        var parameters = new { QuizId = quizId };
+        return await _readDb.QueryAsync<QuizNotecardDto, object>(
+            "note.stp_GetNotecardsByQuizId",
+            parameters);
+    }
 }
