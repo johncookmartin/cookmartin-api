@@ -1,6 +1,7 @@
 using CookMartin.API.Models.NoteCard;
 using CookMartin.Data.Models.NoteCard;
 using CookMartin.NoteCard.Services.Interfaces;
+using Microsoft.Data.SqlClient;
 using System.Security.Claims;
 
 namespace CookMartin.API.Endpoints.NoteCard;
@@ -29,6 +30,10 @@ public static class CollectionEndpoints
             {
                 var collection = await collectionService.CreateCollectionAsync(dto);
                 return Results.Ok(new { ok = true, data = collection });
+            }
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            {
+                return Results.Conflict(new { ok = false, error = "A collection with the same name already exists." });
             }
             catch (Exception ex)
             {
@@ -243,6 +248,10 @@ public static class CollectionEndpoints
                 };
                 var notecard = await notecardService.CreateNotecardAsync(dto);
                 return Results.Ok(new { ok = true, data = notecard });
+            }
+            catch (SqlException ex) when (ex.Number == 2627 || ex.Number == 2601)
+            {
+                return Results.Conflict(new { ok = false, error = "A notecard with the same description already exists in this collection." });
             }
             catch (Exception ex)
             {
