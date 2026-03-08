@@ -18,6 +18,7 @@ public static class DependencyInjection
 
         services.AddScoped<ICollectionRepository, CollectionRepository>();
         services.AddScoped<INotecardRepository, NotecardRepository>();
+        services.AddScoped<IQuizRepository, QuizRepository>();
 
         return services;
     }

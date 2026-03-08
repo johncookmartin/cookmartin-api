@@ -10,7 +10,8 @@ public static class DependencyInjection
     {
         services.AddScoped<INotecardService, NotecardService>();
         services.AddScoped<ICollectionService, CollectionService>();
-        
+        services.AddScoped<IQuizService, QuizService>();
+
         return services;
     }
 }
