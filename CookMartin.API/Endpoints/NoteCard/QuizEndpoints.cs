@@ -36,9 +36,8 @@ public static class QuizEndpoints
         })
         .WithName("CreateQuiz");
 
-        group.MapPut("{quizId:int}/instance/{instanceId:int}", async (
+        group.MapPut("{quizId:int}/answers", async (
             int quizId,
-            int instanceId,
             RecordQuizAnswerRequest request,
             ClaimsPrincipal user,
             IQuizService quizService) =>
@@ -59,7 +58,7 @@ public static class QuizEndpoints
                     return Results.Forbid();
                 }
 
-                RecordQuizAnswerDto dto = new() { QuizId = quizId, InstanceId = instanceId, IsCorrect = request.IsCorrect };
+                RecordQuizAnswerDto dto = new() { QuizId = quizId, NotecardId = request.NotecardId, IsCorrect = request.IsCorrect };
 
                 var result = await quizService.RecordAnswerAsnyc(dto);
                 return Results.Ok(new { ok = true, isComplete = result });
@@ -71,7 +70,7 @@ public static class QuizEndpoints
         })
         .WithName("RecordQuizAnswer");
 
-        group.MapGet("{quizId:int}/notecard", async (
+        group.MapGet("{quizId:int}/next-notecard", async (
             int quizId,
             ClaimsPrincipal user,
             IQuizService quizService,

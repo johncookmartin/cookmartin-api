@@ -36,7 +36,8 @@ public class QuizRepository : IQuizRepository
     public async Task<int> RecordAnswerAsync(IWriteDb writeDb, RecordQuizAnswerDto dto)
     {
         var parameters = new DynamicParameters();
-        parameters.Add("@QuizInstanceId", dto.InstanceId);
+        parameters.Add("@NoteCardId", dto.NotecardId);
+        parameters.Add("@QuizId", dto.QuizId);
         parameters.Add("@IsCorrect", dto.IsCorrect);
         var result = await writeDb.QueryAsync<int, dynamic>("note.stp_RecordQuizAnswer", parameters);
         return result.FirstOrDefault();

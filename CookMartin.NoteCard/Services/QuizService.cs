@@ -25,8 +25,12 @@ public class QuizService : IQuizService
 
     public async Task<bool> RecordAnswerAsnyc(RecordQuizAnswerDto dto)
     {
+        IEnumerable<QuizInstanceDto> quizInstances = await _repository.GetInstancesByIdAsync(dto.QuizId);
+        int remainingQuestions = quizInstances.Count(i => i.AnsweredDate == null);
+
         var isComplete = await _transactionRunner.ExecuteAsync(async writeDb =>
         {
+
             var rowsAffected = await _repository.RecordAnswerAsync(writeDb, dto);
             bool success = rowsAffected > 0;
             if (!success)
@@ -34,10 +38,9 @@ public class QuizService : IQuizService
                 throw new InvalidOperationException("Failed to record answer");
             }
 
-            IEnumerable<QuizInstanceDto> quizInstances = await _repository.GetInstancesByIdAsync(dto.QuizId);
-            int remainingQuestions = quizInstances.Count(i => i.AnsweredDate == null);
-
-            if (remainingQuestions < 1)
+            // The count was taken before the answer was recorded,
+            // so we need to include the affected rows in the count.
+            if (remainingQuestions - rowsAffected < 1)
             {
                 int score = await _repository.CompleteAsync(writeDb, dto.QuizId);
                 return true;

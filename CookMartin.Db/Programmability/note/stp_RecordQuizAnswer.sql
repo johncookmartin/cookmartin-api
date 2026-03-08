@@ -1,5 +1,6 @@
 CREATE PROCEDURE [note].[stp_RecordQuizAnswer]
-    @QuizInstanceId INT,
+    @NotecardId INT,
+    @QuizId INT,
     @IsCorrect BIT
 AS
 BEGIN
@@ -8,7 +9,7 @@ BEGIN
     UPDATE [note].[QuizInstances]
     SET [IsCorrect] = @IsCorrect,
         [AnsweredDate] = GETUTCDATE()
-    WHERE [QuizInstanceId] = @QuizInstanceId AND [AnsweredDate] IS NULL;
+    WHERE [NotecardId] = @NotecardId AND [QuizId] = @QuizId AND [AnsweredDate] IS NULL;
 
     SELECT @@ROWCOUNT AS RowsAffected;
 END
