@@ -7,7 +7,6 @@ BEGIN
     SELECT 
         q.[QuizId],
         q.[CollectionId],
-        c.[Name] AS CollectionName,
         q.[UserId],
         q.[QuizDate],
         q.[Status],
@@ -15,7 +14,6 @@ BEGIN
         q.[CreatedDate],
         q.[IsDeleted]
     FROM [note].[Quizzes] q
-    INNER JOIN [note].[Collections] c ON q.[CollectionId] = c.[CollectionId]
     WHERE q.[UserId] = @UserId
         AND q.[IsDeleted] = 0
     ORDER BY q.[QuizDate] DESC;

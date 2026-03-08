@@ -1,5 +1,5 @@
 using CookMartin.Data.Interfaces;
-using CookMartin.Data.Models.NoteCard;
+using CookMartin.Data.Models.NoteCard.Notecard;
 
 namespace CookMartin.Data.SqlAccess.NoteCard.Interfaces;
 

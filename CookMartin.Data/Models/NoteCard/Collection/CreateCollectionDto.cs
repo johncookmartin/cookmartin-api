@@ -1,4 +1,4 @@
-namespace CookMartin.Data.Models.NoteCard;
+namespace CookMartin.Data.Models.NoteCard.Collection;
 
 public class CreateCollectionDto
 {

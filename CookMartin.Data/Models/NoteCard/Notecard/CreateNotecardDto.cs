@@ -1,8 +1,8 @@
-namespace CookMartin.Data.Models.NoteCard;
+namespace CookMartin.Data.Models.NoteCard.Notecard;
 
-public class UpdateNotecardDto
+public class CreateNotecardDto
 {
-    public int NotecardId { get; set; }
+    public int CollectionId { get; set; }
     public string FrontDescription { get; set; } = string.Empty;
     public string BackDescription { get; set; } = string.Empty;
 }
