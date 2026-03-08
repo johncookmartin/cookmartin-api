@@ -34,12 +34,12 @@ public class QuizService : IQuizService
                 throw new InvalidOperationException("Failed to record answer");
             }
 
-            IEnumerable<QuizInstanceDto> quizInstances = await _repository.GetInstancesByIdAsync(dto.quizId);
+            IEnumerable<QuizInstanceDto> quizInstances = await _repository.GetInstancesByIdAsync(dto.QuizId);
             int remainingQuestions = quizInstances.Count(i => i.AnsweredDate == null);
 
             if (remainingQuestions < 1)
             {
-                int score = await _repository.CompleteAsync(writeDb, dto.quizId);
+                int score = await _repository.CompleteAsync(writeDb, dto.QuizId);
                 return true;
             }
 

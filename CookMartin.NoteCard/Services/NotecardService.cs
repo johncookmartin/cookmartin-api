@@ -59,7 +59,7 @@ public class NotecardService : INotecardService
         });
     }
 
-    public async Task<QuizNotecardDto?> GetNextNoteCardDtoAsync(int quizId)
+    public async Task<QuizNotecardDto?> GetNextNoteCardAsync(int quizId)
     {
         var notecards = await _repository.GetNotecardsByQuizIdAsync(quizId);
         if (notecards == null) return null;

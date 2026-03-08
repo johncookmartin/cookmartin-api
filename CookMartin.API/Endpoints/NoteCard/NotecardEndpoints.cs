@@ -1,6 +1,7 @@
-using System.Security.Claims;
+using CookMartin.API.Extensions;
 using CookMartin.Data.Models.NoteCard.Notecard;
 using CookMartin.NoteCard.Services.Interfaces;
+using System.Security.Claims;
 
 namespace CookMartin.API.Endpoints.NoteCard;
 
@@ -18,10 +19,7 @@ public static class NotecardEndpoints
             INotecardService notecardService,
             ICollectionService collectionService) =>
         {
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value 
-                ?? user.FindFirst("oid")?.Value 
-                ?? user.FindFirst("sub")?.Value
-                ?? "guest";
+            var userId = user.GetUserId();
 
             try
             {
@@ -33,7 +31,7 @@ public static class NotecardEndpoints
                 }
 
                 var collection = await collectionService.GetCollectionByIdAsync(notecard.CollectionId);
-                
+
                 if (collection == null || collection.UserId != userId)
                 {
                     return Results.Forbid();
@@ -55,10 +53,7 @@ public static class NotecardEndpoints
             INotecardService notecardService,
             ICollectionService collectionService) =>
         {
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value 
-                ?? user.FindFirst("oid")?.Value 
-                ?? user.FindFirst("sub")?.Value
-                ?? "guest";
+            var userId = user.GetUserId();
 
             try
             {
@@ -70,7 +65,7 @@ public static class NotecardEndpoints
                 }
 
                 var collection = await collectionService.GetCollectionByIdAsync(notecard.CollectionId);
-                
+
                 if (collection == null || collection.UserId != userId)
                 {
                     return Results.Forbid();
@@ -78,7 +73,7 @@ public static class NotecardEndpoints
 
                 dto.NotecardId = id;
                 var success = await notecardService.UpdateNotecardAsync(id, dto);
-                
+
                 if (success)
                 {
                     var updatedNotecard = await notecardService.GetNotecardByIdAsync(id);
@@ -100,10 +95,7 @@ public static class NotecardEndpoints
             INotecardService notecardService,
             ICollectionService collectionService) =>
         {
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value 
-                ?? user.FindFirst("oid")?.Value 
-                ?? user.FindFirst("sub")?.Value
-                ?? "guest";
+            var userId = user.GetUserId();
 
             try
             {
@@ -115,14 +107,14 @@ public static class NotecardEndpoints
                 }
 
                 var collection = await collectionService.GetCollectionByIdAsync(notecard.CollectionId);
-                
+
                 if (collection == null || collection.UserId != userId)
                 {
                     return Results.Forbid();
                 }
 
                 var success = await notecardService.DeleteNotecardAsync(id);
-                
+
                 if (success)
                 {
                     return Results.Ok(new { ok = true, message = "Notecard deleted successfully" });

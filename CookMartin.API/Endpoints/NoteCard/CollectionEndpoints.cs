@@ -1,3 +1,4 @@
+using CookMartin.API.Extensions;
 using CookMartin.API.Models.NoteCard;
 using CookMartin.Data.Models.NoteCard.Collection;
 using CookMartin.Data.Models.NoteCard.Notecard;
@@ -20,10 +21,7 @@ public static class CollectionEndpoints
             ClaimsPrincipal user,
             ICollectionService collectionService) =>
         {
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
-                ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value
-                ?? "guest";
+            var userId = user.GetUserId();
 
             CreateCollectionDto dto = new() { UserId = userId, Name = request.Name };
 
@@ -47,10 +45,7 @@ public static class CollectionEndpoints
             ClaimsPrincipal user,
             ICollectionService collectionService) =>
         {
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
-                ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value
-                ?? "guest";
+            var userId = user.GetUserId();
 
             try
             {
@@ -69,10 +64,7 @@ public static class CollectionEndpoints
             ClaimsPrincipal user,
             ICollectionService collectionService) =>
         {
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
-                ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value
-                ?? "guest";
+            var userId = user.GetUserId();
 
             try
             {
@@ -103,10 +95,7 @@ public static class CollectionEndpoints
             ClaimsPrincipal user,
             ICollectionService collectionService) =>
         {
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
-                ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value
-                ?? "guest";
+            var userId = user.GetUserId();
 
             try
             {
@@ -145,10 +134,7 @@ public static class CollectionEndpoints
             ClaimsPrincipal user,
             ICollectionService collectionService) =>
         {
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
-                ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value
-                ?? "guest";
+            var userId = user.GetUserId();
 
             try
             {
@@ -186,10 +172,7 @@ public static class CollectionEndpoints
             INotecardService notecardService,
             ICollectionService collectionService) =>
         {
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
-                ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value
-                ?? "guest";
+            var userId = user.GetUserId();
 
             try
             {
@@ -222,10 +205,7 @@ public static class CollectionEndpoints
             INotecardService notecardService,
             ICollectionService collectionService) =>
         {
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
-                ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value
-                ?? "guest";
+            var userId = user.GetUserId();
 
             try
             {

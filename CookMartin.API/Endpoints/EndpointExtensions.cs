@@ -9,5 +9,6 @@ public static class EndpointExtensions
         app.MapBlobEndpoints();
         app.MapCollectionEndpoints();
         app.MapNotecardEndpoints();
+        app.MapQuizEndpoints();
     }
 }

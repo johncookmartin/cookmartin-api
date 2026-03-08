@@ -9,4 +9,5 @@ public interface INotecardService
     Task<IEnumerable<NotecardDto>> GetNotecardsByCollectionAsync(int collectionId);
     Task<bool> UpdateNotecardAsync(int notecardId, UpdateNotecardDto dto);
     Task<bool> DeleteNotecardAsync(int notecardId);
+    Task<QuizNotecardDto?> GetNextNoteCardAsync(int quizId);
 }
