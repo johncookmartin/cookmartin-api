@@ -9,7 +9,7 @@ public static class NotecardEndpoints
     public static void MapNotecardEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/api/notecard/notecards")
-            .RequireAuthorization()
+            .AllowAnonymous()
             .WithTags("NoteCard - Notecards");
 
         group.MapGet("{id:int}", async (
@@ -20,17 +20,13 @@ public static class NotecardEndpoints
         {
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value 
                 ?? user.FindFirst("oid")?.Value 
-                ?? user.FindFirst("sub")?.Value;
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Results.Unauthorized();
-            }
+                ?? user.FindFirst("sub")?.Value
+                ?? "guest";
 
             try
             {
                 var notecard = await notecardService.GetNotecardByIdAsync(id);
-                
+
                 if (notecard == null)
                 {
                     return Results.NotFound(new { ok = false, error = "Notecard not found" });
@@ -61,17 +57,13 @@ public static class NotecardEndpoints
         {
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value 
                 ?? user.FindFirst("oid")?.Value 
-                ?? user.FindFirst("sub")?.Value;
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Results.Unauthorized();
-            }
+                ?? user.FindFirst("sub")?.Value
+                ?? "guest";
 
             try
             {
                 var notecard = await notecardService.GetNotecardByIdAsync(id);
-                
+
                 if (notecard == null)
                 {
                     return Results.NotFound(new { ok = false, error = "Notecard not found" });
@@ -110,17 +102,13 @@ public static class NotecardEndpoints
         {
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value 
                 ?? user.FindFirst("oid")?.Value 
-                ?? user.FindFirst("sub")?.Value;
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Results.Unauthorized();
-            }
+                ?? user.FindFirst("sub")?.Value
+                ?? "guest";
 
             try
             {
                 var notecard = await notecardService.GetNotecardByIdAsync(id);
-                
+
                 if (notecard == null)
                 {
                     return Results.NotFound(new { ok = false, error = "Notecard not found" });

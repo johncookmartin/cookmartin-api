@@ -10,7 +10,7 @@ public static class CollectionEndpoints
     public static void MapCollectionEndpoints(this WebApplication app)
     {
         var group = app.MapGroup("/api/notecard/collections")
-            .RequireAuthorization()
+            .AllowAnonymous()
             .WithTags("NoteCard - Collections");
 
         group.MapPost("", async (
@@ -20,12 +20,8 @@ public static class CollectionEndpoints
         {
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
                 ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value;
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Results.Unauthorized();
-            }
+                ?? user.FindFirst("sub")?.Value
+                ?? "guest";
 
             CreateCollectionDto dto = new() { UserId = userId, Name = request.Name };
 
@@ -47,12 +43,8 @@ public static class CollectionEndpoints
         {
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
                 ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value;
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Results.Unauthorized();
-            }
+                ?? user.FindFirst("sub")?.Value
+                ?? "guest";
 
             try
             {
@@ -73,12 +65,8 @@ public static class CollectionEndpoints
         {
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
                 ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value;
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Results.Unauthorized();
-            }
+                ?? user.FindFirst("sub")?.Value
+                ?? "guest";
 
             try
             {
@@ -111,12 +99,8 @@ public static class CollectionEndpoints
         {
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
                 ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value;
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Results.Unauthorized();
-            }
+                ?? user.FindFirst("sub")?.Value
+                ?? "guest";
 
             try
             {
@@ -157,12 +141,8 @@ public static class CollectionEndpoints
         {
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
                 ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value;
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Results.Unauthorized();
-            }
+                ?? user.FindFirst("sub")?.Value
+                ?? "guest";
 
             try
             {
@@ -202,12 +182,8 @@ public static class CollectionEndpoints
         {
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
                 ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value;
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Results.Unauthorized();
-            }
+                ?? user.FindFirst("sub")?.Value
+                ?? "guest";
 
             try
             {
@@ -242,12 +218,8 @@ public static class CollectionEndpoints
         {
             var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value
                 ?? user.FindFirst("oid")?.Value
-                ?? user.FindFirst("sub")?.Value;
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return Results.Unauthorized();
-            }
+                ?? user.FindFirst("sub")?.Value
+                ?? "guest";
 
             try
             {
