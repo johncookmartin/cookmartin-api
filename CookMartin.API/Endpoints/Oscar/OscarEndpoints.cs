@@ -11,6 +11,10 @@ public static class OscarEndpoints
             .AllowAnonymous()
             .WithTags("Oscar");
 
+        var adminGroup = app.MapGroup("/oscar/admin")
+            .RequireAuthorization()
+            .WithTags("Oscar");
+
         group.MapGet("categories", async (IOscarService oscarService) =>
         {
             try
@@ -39,7 +43,7 @@ public static class OscarEndpoints
         })
         .WithName("SubmitOscarPicks");
 
-        group.MapPost("admin/winner/{nomineeId:int}", async (int nomineeId, IOscarService oscarService) =>
+        adminGroup.MapPost("winner/{nomineeId:int}", async (int nomineeId, IOscarService oscarService) =>
         {
             try
             {

@@ -99,6 +99,10 @@
     <Build Include="Programmability\note\stp_GetNotecardsByQuizId.sql" />
   </ItemGroup>
   <ItemGroup>
+    <PostDeploy Include="Script.PostDeployment.sql" />
+    <None Include="seed_oscar_2026.sql" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="cookmartin-db-dev.publish.xml" />
     <None Include="cookmartin-db-prod.publish.xml" />
   </ItemGroup>
