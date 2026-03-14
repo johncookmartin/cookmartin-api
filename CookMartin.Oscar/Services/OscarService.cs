@@ -38,6 +38,14 @@ public class OscarService : IOscarService
         });
     }
 
+    public async Task ClearWinnerAsync(int nomineeId)
+    {
+        await _transactionRunner.ExecuteAsync(async writeDb =>
+        {
+            await _repository.ClearWinnerAsync(writeDb, nomineeId);
+        });
+    }
+
     public async Task<IEnumerable<LeaderboardEntryDto>> GetLeaderboardAsync()
     {
         return await _repository.GetLeaderboardAsync();

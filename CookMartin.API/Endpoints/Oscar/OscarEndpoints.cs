@@ -57,6 +57,20 @@ public static class OscarEndpoints
         })
         .WithName("SetOscarWinner");
 
+        adminGroup.MapDelete("winner/{nomineeId:int}", async (int nomineeId, IOscarService oscarService) =>
+        {
+            try
+            {
+                await oscarService.ClearWinnerAsync(nomineeId);
+                return Results.Ok(new { ok = true });
+            }
+            catch (Exception ex)
+            {
+                return Results.BadRequest(new { ok = false, error = ex.Message });
+            }
+        })
+        .WithName("ClearOscarWinner");
+
         group.MapGet("leaderboard", async (IOscarService oscarService) =>
         {
             try

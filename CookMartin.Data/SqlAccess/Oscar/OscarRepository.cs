@@ -58,6 +58,13 @@ public class OscarRepository : IOscarRepository
         await writeDb.ExecuteAsync("oscar.stp_SetWinner", parameters);
     }
 
+    public async Task ClearWinnerAsync(IWriteDb writeDb, int nomineeId)
+    {
+        var parameters = new DynamicParameters();
+        parameters.Add("@NomineeId", nomineeId);
+        await writeDb.ExecuteAsync("oscar.stp_ClearWinner", parameters);
+    }
+
     public async Task<IEnumerable<LeaderboardEntryDto>> GetLeaderboardAsync()
     {
         return await _readDb.QueryAsync<LeaderboardEntryDto, dynamic>("oscar.stp_GetLeaderboard", new { });

@@ -8,6 +8,7 @@ public interface IOscarRepository
     Task<IEnumerable<CategoryDto>> GetCategoriesWithNomineesAsync();
     Task UpsertPickAsync(IWriteDb writeDb, UpsertPickDto dto);
     Task SetWinnerAsync(IWriteDb writeDb, int nomineeId);
+    Task ClearWinnerAsync(IWriteDb writeDb, int nomineeId);
     Task<IEnumerable<LeaderboardEntryDto>> GetLeaderboardAsync();
     Task<IEnumerable<UserResultDto>> GetUserResultsAsync(string userName);
     Task<IEnumerable<SubmissionDto>> GetSubmissionsAsync();

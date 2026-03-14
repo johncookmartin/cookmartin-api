@@ -8,26 +8,30 @@ BEGIN
     SET IDENTITY_INSERT [oscar].[Categories] ON;
 
     INSERT INTO [oscar].[Categories] ([CategoryId], [Name], [DisplayOrder]) VALUES
-    (1,  'Best Picture',                1),
-    (2,  'Best Director',               2),
-    (3,  'Best Actor',                  3),
-    (4,  'Best Actress',                4),
-    (5,  'Best Supporting Actor',       5),
-    (6,  'Best Supporting Actress',     6),
-    (7,  'Best Animated Feature',       7),
-    (8,  'Best International Feature',  8),
-    (9,  'Best Documentary Feature',    9),
-    (10, 'Best Original Screenplay',    10),
-    (11, 'Best Adapted Screenplay',     11),
-    (12, 'Best Cinematography',         12),
-    (13, 'Best Film Editing',           13),
-    (14, 'Best Original Score',         14),
-    (15, 'Best Original Song',          15),
-    (16, 'Best Production Design',      16),
-    (17, 'Best Costume Design',         17),
-    (18, 'Best Makeup and Hairstyling', 18),
-    (19, 'Best Visual Effects',         19),
-    (20, 'Best Sound',                  20);
+    (1,  'Best Picture',                24),
+    (2,  'Best Director',               22),
+    (3,  'Best Actor',                  21),
+    (4,  'Best Actress',                23),
+    (5,  'Best Supporting Actor',       1),
+    (6,  'Best Supporting Actress',     9),
+    (7,  'Best Animated Feature',       2),
+    (8,  'Best International Feature',  18),
+    (9,  'Best Documentary Feature',    13),
+    (10, 'Best Original Screenplay',    5),
+    (11, 'Best Adapted Screenplay',     6),
+    (12, 'Best Cinematography',         17),
+    (13, 'Best Film Editing',           8),
+    (14, 'Best Original Score',         20),
+    (15, 'Best Original Song',          11),
+    (16, 'Best Production Design',      10),
+    (17, 'Best Costume Design',         4),
+    (18, 'Best Makeup and Hairstyling', 7),
+    (19, 'Best Visual Effects',         15),
+    (20, 'Best Sound',                  14),
+    (21, 'Best Live Action Short Film', 16),
+    (22, 'Best Documentary Short Film', 12),
+    (23, 'Best Casting',                19),
+    (24, 'Best Animated Short Film',    3);
 
     SET IDENTITY_INSERT [oscar].[Categories] OFF;
 
@@ -195,5 +199,38 @@ BEGIN
     (20, 'One Battle After Another'),
     (20, 'Sinners'),
     (20, 'Sirât');
+
+    -- Live Action Short Film
+    INSERT INTO [oscar].[Nominees] ([CategoryId], [Name]) VALUES
+    (21, 'Butcher''s Stain'),
+    (21, 'A Friend of Dorothy'),
+    (21, 'Jane Austen''s Period Drama'),
+    (21, 'The Singers'),
+    (21, 'Two People Exchanging Saliva');
+
+    -- Documentary Short Film
+    INSERT INTO [oscar].[Nominees] ([CategoryId], [Name]) VALUES
+    (22, 'All the Empty Rooms'),
+    (22, 'Armed Only With a Camera: The Life and Death of Brent Renaud'),
+    (22, 'Children No More: ''Were and are Gone'''),
+    (22, 'The Devil is Busy'),
+    (22, 'Perfectly a Strangeness');
+
+    -- Casting
+    INSERT INTO [oscar].[Nominees] ([CategoryId], [Name]) VALUES
+    (23, 'Hamnet'),
+    (23, 'Marty Supreme'),
+    (23, 'One Battle After Another'),
+    (23, 'The Secret Agent'),
+    (23, 'Sinners');
+
+    -- Animated Short Film
+    INSERT INTO [oscar].[Nominees] ([CategoryId], [Name]) VALUES
+    (24, 'Butterfly'),
+    (24, 'Forevergreen'),
+    (24, 'The Girl Who Cried Pearls'),
+    (24, 'Retirement Plan'),
+    (24, 'The Three Sisters');
+
 
 END

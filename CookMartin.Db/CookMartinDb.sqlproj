@@ -74,6 +74,7 @@
     <Build Include="Programmability\oscar\stp_GetLeaderboard.sql" />
     <Build Include="Programmability\oscar\stp_GetUserResults.sql" />
     <Build Include="Programmability\oscar\stp_GetSubmissions.sql" />
+    <Build Include="Programmability\oscar\stp_ClearWinner.sql" />
     <Build Include="Tables\note.Collections.sql" />
     <Build Include="Tables\note.Notecards.sql" />
     <Build Include="Tables\note.QuizInstances.sql" />
