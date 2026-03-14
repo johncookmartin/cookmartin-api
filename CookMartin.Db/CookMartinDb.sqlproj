@@ -60,9 +60,20 @@
     <Folder Include="Tables" />
     <Folder Include="Programmability" />
     <Folder Include="Programmability\note\" />
+    <Folder Include="Programmability\oscar\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Security\note.sql" />
+    <Build Include="Security\oscar.sql" />
+    <Build Include="Tables\oscar.Categories.sql" />
+    <Build Include="Tables\oscar.Nominees.sql" />
+    <Build Include="Tables\oscar.Picks.sql" />
+    <Build Include="Programmability\oscar\stp_GetCategoriesWithNominees.sql" />
+    <Build Include="Programmability\oscar\stp_UpsertPick.sql" />
+    <Build Include="Programmability\oscar\stp_SetWinner.sql" />
+    <Build Include="Programmability\oscar\stp_GetLeaderboard.sql" />
+    <Build Include="Programmability\oscar\stp_GetUserResults.sql" />
+    <Build Include="Programmability\oscar\stp_GetSubmissions.sql" />
     <Build Include="Tables\note.Collections.sql" />
     <Build Include="Tables\note.Notecards.sql" />
     <Build Include="Tables\note.QuizInstances.sql" />

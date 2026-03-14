@@ -1,4 +1,5 @@
 using CookMartin.API.Endpoints.NoteCard;
+using CookMartin.API.Endpoints.Oscar;
 
 namespace CookMartin.API.Endpoints;
 
@@ -10,5 +11,6 @@ public static class EndpointExtensions
         app.MapCollectionEndpoints();
         app.MapNotecardEndpoints();
         app.MapQuizEndpoints();
+        app.MapOscarEndpoints();
     }
 }

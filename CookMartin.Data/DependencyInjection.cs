@@ -2,6 +2,8 @@
 using CookMartin.Data.SqlAccess;
 using CookMartin.Data.SqlAccess.NoteCard.Interfaces;
 using CookMartin.Data.SqlAccess.NoteCard.Repositories;
+using CookMartin.Data.SqlAccess.Oscar;
+using CookMartin.Data.SqlAccess.Oscar.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +21,7 @@ public static class DependencyInjection
         services.AddScoped<ICollectionRepository, CollectionRepository>();
         services.AddScoped<INotecardRepository, NotecardRepository>();
         services.AddScoped<IQuizRepository, QuizRepository>();
+        services.AddScoped<IOscarRepository, OscarRepository>();
 
         return services;
     }
