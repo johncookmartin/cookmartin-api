@@ -48,6 +48,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 builder.Services.AddOpenApi();
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -69,6 +70,7 @@ app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapHub<CookMartin.API.Hubs.OscarHub>("/hubs/oscar");
 app.MapAllEndpoints();
 
 app.MapControllers();

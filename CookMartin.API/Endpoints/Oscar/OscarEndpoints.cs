@@ -1,5 +1,7 @@
+using CookMartin.API.Hubs;
 using CookMartin.API.Models.Oscar;
 using CookMartin.Oscar.Services.Interfaces;
+using Microsoft.AspNetCore.SignalR;
 
 namespace CookMartin.API.Endpoints.Oscar;
 
@@ -29,11 +31,14 @@ public static class OscarEndpoints
         })
         .WithName("GetOscarCategories");
 
-        group.MapPost("picks", async (SubmitPicksRequest request, IOscarService oscarService) =>
+        group.MapPost("picks", async (SubmitPicksRequest request, IOscarService oscarService, IHubContext<OscarHub> hubContext) =>
         {
             try
             {
                 await oscarService.SubmitPicksAsync(request.UserName, request.Picks);
+                await hubContext.Clients.All.SendAsync("LeaderboardChanged");
+                await hubContext.Clients.All.SendAsync("SubmissionsChanged");
+                await hubContext.Clients.All.SendAsync("ResultsChanged");
                 return Results.Ok(new { ok = true });
             }
             catch (Exception ex)
@@ -43,11 +48,14 @@ public static class OscarEndpoints
         })
         .WithName("SubmitOscarPicks");
 
-        adminGroup.MapPost("winner/{nomineeId:int}", async (int nomineeId, IOscarService oscarService) =>
+        adminGroup.MapPost("winner/{nomineeId:int}", async (int nomineeId, IOscarService oscarService, IHubContext<OscarHub> hubContext) =>
         {
             try
             {
                 await oscarService.SetWinnerAsync(nomineeId);
+                await hubContext.Clients.All.SendAsync("CategoriesChanged");
+                await hubContext.Clients.All.SendAsync("LeaderboardChanged");
+                await hubContext.Clients.All.SendAsync("ResultsChanged");
                 return Results.Ok(new { ok = true });
             }
             catch (Exception ex)
@@ -57,11 +65,14 @@ public static class OscarEndpoints
         })
         .WithName("SetOscarWinner");
 
-        adminGroup.MapDelete("winner/{nomineeId:int}", async (int nomineeId, IOscarService oscarService) =>
+        adminGroup.MapDelete("winner/{nomineeId:int}", async (int nomineeId, IOscarService oscarService, IHubContext<OscarHub> hubContext) =>
         {
             try
             {
                 await oscarService.ClearWinnerAsync(nomineeId);
+                await hubContext.Clients.All.SendAsync("CategoriesChanged");
+                await hubContext.Clients.All.SendAsync("LeaderboardChanged");
+                await hubContext.Clients.All.SendAsync("ResultsChanged");
                 return Results.Ok(new { ok = true });
             }
             catch (Exception ex)
