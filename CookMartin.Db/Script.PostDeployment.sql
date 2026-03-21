@@ -5,3 +5,4 @@
 */
 
 :r .\seed_oscar_2026.sql
+:r .\grant_schema_execute.sql

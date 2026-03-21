@@ -102,6 +102,7 @@
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
     <None Include="seed_oscar_2026.sql" />
+    <None Include="grant_schema_execute.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="cookmartin-db-dev.publish.xml" />
