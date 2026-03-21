@@ -4,14 +4,13 @@ using CookMartin.Data.SqlAccess.NoteCard.Interfaces;
 using CookMartin.Data.SqlAccess.NoteCard.Repositories;
 using CookMartin.Data.SqlAccess.Oscar;
 using CookMartin.Data.SqlAccess.Oscar.Interfaces;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CookMartin.Data;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddDbService(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddDbService(this IServiceCollection services)
     {
         services.AddScoped<IConnectionFactory, SqlConnectionFactory>();
         services.AddScoped<IUnitOfWorkFactory, SqlUnitOfWorkFactory>();

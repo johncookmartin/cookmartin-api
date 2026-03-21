@@ -15,7 +15,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 
-builder.Services.AddDbService(builder.Configuration);
+builder.Services.AddDbService();
 builder.Services.AddNoteCardServices();
 builder.Services.AddOscarServices();
 builder.Services.AddBlobServices(builder.Configuration);
