@@ -33,7 +33,23 @@ public class CollectionService : ICollectionService
 
     public async Task<IEnumerable<CollectionDto>> GetCollectionsByUserAsync(string userId)
     {
-        return await _repository.GetByUserAsync(userId);
+        IEnumerable<CollectionDto> collections = await _repository.GetByUserAsync(userId);
+        if (userId == "guest" && collections.Count() < 1)
+        {
+            int addedCards = await CreateGuestCollectionAsync();
+            collections = await _repository.GetByUserAsync(userId);
+        }
+
+        return collections;
+    }
+
+    public async Task<int> CreateGuestCollectionAsync()
+    {
+        return await _transactionRunner.ExecuteAsync(async writeDb =>
+        {
+            int addedCards = await _repository.CreateDefaultGuestCollectionAsync(writeDb);
+            return addedCards < 1 ? throw new Exception("Failed to create default guest collection") : addedCards;
+        });
     }
 
     public async Task<bool> UpdateCollectionAsync(int collectionId, UpdateCollectionDto dto)

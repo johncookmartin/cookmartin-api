@@ -98,6 +98,7 @@
     <Build Include="Programmability\note\stp_UpdateCollection.sql" />
     <Build Include="Programmability\note\stp_UpdateNoteCard.sql" />
     <Build Include="Programmability\note\stp_GetNotecardsByQuizId.sql" />
+    <Build Include="Programmability\note\stp_SeedGuest.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

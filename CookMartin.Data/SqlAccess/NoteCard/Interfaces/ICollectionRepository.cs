@@ -10,4 +10,5 @@ public interface ICollectionRepository
     Task<CollectionDto?> GetByIdAsync(int collectionId);
     Task<int> UpdateAsync(IWriteDb writeDb, UpdateCollectionDto dto);
     Task<int> DeleteAsync(IWriteDb writeDb, int collectionId);
+    Task<int> CreateDefaultGuestCollectionAsync(IWriteDb writeDb);
 }

@@ -37,6 +37,14 @@ public class CollectionRepository : ICollectionRepository
             parameters);
     }
 
+    public async Task<int> CreateDefaultGuestCollectionAsync(IWriteDb writeDb)
+    {
+        var result = await writeDb.QueryAsync<dynamic, object>(
+            "note.stp_SeedGuest",
+            new { });
+        return result.FirstOrDefault()?.CardsInserted ?? 0;
+    }
+
     public async Task<CollectionDto?> GetByIdAsync(int collectionId)
     {
         var parameters = new { CollectionId = collectionId };

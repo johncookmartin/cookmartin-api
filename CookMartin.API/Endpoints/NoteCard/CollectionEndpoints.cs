@@ -188,7 +188,7 @@ public static class CollectionEndpoints
                     return Results.Forbid();
                 }
 
-                var notecards = await notecardService.GetNotecardsByCollectionAsync(id);
+                var notecards = await notecardService.GetNotecardsByCollectionAsync(collection);
                 return Results.Ok(new { ok = true, data = notecards });
             }
             catch (Exception ex)

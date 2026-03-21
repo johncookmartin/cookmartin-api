@@ -1,4 +1,5 @@
 using CookMartin.Data.Interfaces;
+using CookMartin.Data.Models.NoteCard.Collection;
 using CookMartin.Data.Models.NoteCard.Notecard;
 using CookMartin.Data.SqlAccess.NoteCard.Interfaces;
 using CookMartin.NoteCard.Services.Interfaces;
@@ -11,12 +12,14 @@ public class NotecardService : INotecardService
     private readonly INotecardRepository _repository;
     private readonly IReadDb _readDb;
     private readonly ITransactionRunner _transactionRunner;
+    private readonly ICollectionService _collectionService;
 
-    public NotecardService(INotecardRepository repository, IReadDb readDb, ITransactionRunner transactionRunner)
+    public NotecardService(INotecardRepository repository, IReadDb readDb, ITransactionRunner transactionRunner, ICollectionService collectionService)
     {
         _repository = repository;
         _readDb = readDb;
         _transactionRunner = transactionRunner;
+        _collectionService = collectionService;
     }
 
     public async Task<NotecardDto> CreateNotecardAsync(CreateNotecardDto dto)
@@ -35,9 +38,18 @@ public class NotecardService : INotecardService
         return await _repository.GetByIdAsync(notecardId);
     }
 
-    public async Task<IEnumerable<NotecardDto>> GetNotecardsByCollectionAsync(int collectionId)
+    public async Task<IEnumerable<NotecardDto>> GetNotecardsByCollectionAsync(CollectionDto collection)
     {
-        return await _repository.GetByCollectionAsync(collectionId);
+        IEnumerable<NotecardDto> notecards = await _repository.GetByCollectionAsync(collection.CollectionId);
+        if (notecards.Count() < 5)
+        {
+            if (collection.UserId == "guest" && collection.Name == "Default Guest Collection")
+            {
+                int addedcards = await _collectionService.CreateGuestCollectionAsync();
+                notecards = await _repository.GetByCollectionAsync(collection.CollectionId);
+            }
+        }
+        return notecards;
     }
 
     public async Task<bool> UpdateNotecardAsync(int notecardId, UpdateNotecardDto dto)
