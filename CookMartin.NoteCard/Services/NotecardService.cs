@@ -74,7 +74,7 @@ public class NotecardService : INotecardService
     public async Task<QuizNotecardDto?> GetNextNoteCardAsync(int quizId)
     {
         var notecards = await _repository.GetNotecardsByQuizIdAsync(quizId);
-        if (notecards == null) return null;
+        if (notecards.Count() < 1) return null;
 
         var nextNotecard = notecards.ElementAt(_rng.Next(notecards.Count()));
         return nextNotecard;

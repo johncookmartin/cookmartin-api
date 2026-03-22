@@ -8,9 +8,13 @@ BEGIN
         qi.[QuizInstanceId],
         qi.[QuizId],
         qi.[NotecardId],
+        n.[FrontDescription],
+        n.[BackDescription],
         qi.[IsCorrect],
         qi.[AnsweredDate]
     FROM [note].[QuizInstances] qi
+    INNER JOIN [note].[Notecards] n
+    ON n.[NotecardId] = qi.[NotecardId]
     WHERE qi.[QuizId] = @QuizId
     ORDER BY qi.[QuizInstanceId];
 END
