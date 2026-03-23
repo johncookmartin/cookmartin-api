@@ -61,9 +61,9 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "CookMartinApi v1");
     });
     app.MapOpenApi();
-}
 
-app.UseHttpsRedirection();
+    app.UseHttpsRedirection();
+}
 
 app.UseCors("AllowFrontend");
 
