@@ -71,6 +71,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapHub<CookMartin.API.Hubs.OscarHub>("/hubs/oscar");
+
+app.MapGet("/health", () => Results.Ok(new { ok = true, message = "API is healthy" }))
+    .WithName("HealthCheck")
+    .WithTags("Health");
 app.MapAllEndpoints();
 
 app.MapControllers();
