@@ -61,10 +61,17 @@
     <Folder Include="Programmability" />
     <Folder Include="Programmability\note\" />
     <Folder Include="Programmability\oscar\" />
+    <Folder Include="Programmability\budget\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Security\note.sql" />
     <Build Include="Security\oscar.sql" />
+    <Build Include="Security\budget.sql" />
+    <Build Include="Tables\budget.Collections.sql" />
+    <Build Include="Tables\budget.CollectionUsers.sql" />
+    <Build Include="Tables\budget.Budgets.sql" />
+    <Build Include="Tables\budget.BudgetItems.sql" />
+    <Build Include="Tables\budget.RecurringItems.sql" />
     <Build Include="Tables\oscar.Categories.sql" />
     <Build Include="Tables\oscar.Nominees.sql" />
     <Build Include="Tables\oscar.Picks.sql" />
