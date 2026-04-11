@@ -1,3 +1,4 @@
+using CookMartin.API.Endpoints.Budget;
 using CookMartin.API.Endpoints.NoteCard;
 using CookMartin.API.Endpoints.Oscar;
 
@@ -12,5 +13,9 @@ public static class EndpointExtensions
         app.MapNotecardEndpoints();
         app.MapQuizEndpoints();
         app.MapOscarEndpoints();
+        app.MapBudgetCollectionEndpoints();
+        app.MapBudgetEndpoints();
+        app.MapBudgetItemEndpoints();
+        app.MapRecurringItemEndpoints();
     }
 }

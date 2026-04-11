@@ -1,5 +1,6 @@
 using CookMartin.API.Endpoints;
 using CookMartin.Blob;
+using CookMartin.Budget;
 using CookMartin.Data;
 using CookMartin.NoteCard;
 using CookMartin.Oscar;
@@ -18,6 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbService();
 builder.Services.AddNoteCardServices();
 builder.Services.AddOscarServices();
+builder.Services.AddBudgetServices();
 builder.Services.AddBlobServices(builder.Configuration);
 
 builder.Services.AddCors(options =>
