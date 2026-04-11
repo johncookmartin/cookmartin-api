@@ -1,5 +1,7 @@
 ﻿using CookMartin.Data.Interfaces;
 using CookMartin.Data.SqlAccess;
+using CookMartin.Data.SqlAccess.Budget.Interfaces;
+using CookMartin.Data.SqlAccess.Budget.Repositories;
 using CookMartin.Data.SqlAccess.NoteCard.Interfaces;
 using CookMartin.Data.SqlAccess.NoteCard.Repositories;
 using CookMartin.Data.SqlAccess.Oscar;
@@ -21,6 +23,11 @@ public static class DependencyInjection
         services.AddScoped<INotecardRepository, NotecardRepository>();
         services.AddScoped<IQuizRepository, QuizRepository>();
         services.AddScoped<IOscarRepository, OscarRepository>();
+
+        services.AddScoped<IBudgetCollectionRepository, BudgetCollectionRepository>();
+        services.AddScoped<IBudgetRepository, BudgetRepository>();
+        services.AddScoped<IBudgetItemRepository, BudgetItemRepository>();
+        services.AddScoped<IRecurringItemRepository, RecurringItemRepository>();
 
         return services;
     }
