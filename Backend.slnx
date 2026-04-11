@@ -4,6 +4,7 @@
   <Project Path="CookMartin.Data/CookMartin.Data.csproj" Id="ce4c2a3c-7f41-4773-abb6-23cee8052987" />
   <Project Path="CookMartin.NoteCard/CookMartin.NoteCard.csproj" Id="4d16835e-96b4-44b5-9872-9af0fb0cb63b" />
   <Project Path="CookMartin.Oscar/CookMartin.Oscar.csproj" Id="f3a91c2e-84b7-4d5e-a612-7e8c3f091b45" />
+  <Project Path="CookMartin.Budget/CookMartin.Budget.csproj" Id="a7b2c3d4-e5f6-4789-abcd-ef0123456789" />
   <Project Path="CookMartin.Db/CookMartinDb.sqlproj" Id="805ea222-671e-42d4-a5e2-303d09721c8a">
     <Build />
     <Deploy />
