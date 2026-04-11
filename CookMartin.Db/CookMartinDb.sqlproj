@@ -106,6 +106,28 @@
     <Build Include="Programmability\note\stp_UpdateNoteCard.sql" />
     <Build Include="Programmability\note\stp_GetNotecardsByQuizId.sql" />
     <Build Include="Programmability\note\stp_SeedGuest.sql" />
+    <Build Include="Programmability\budget\stp_CreateCollection.sql" />
+    <Build Include="Programmability\budget\stp_GetCollectionById.sql" />
+    <Build Include="Programmability\budget\stp_GetCollectionsByUser.sql" />
+    <Build Include="Programmability\budget\stp_UpdateCollection.sql" />
+    <Build Include="Programmability\budget\stp_DeleteCollection.sql" />
+    <Build Include="Programmability\budget\stp_AddCollectionUser.sql" />
+    <Build Include="Programmability\budget\stp_RemoveCollectionUser.sql" />
+    <Build Include="Programmability\budget\stp_CreateBudget.sql" />
+    <Build Include="Programmability\budget\stp_GetBudgetById.sql" />
+    <Build Include="Programmability\budget\stp_GetBudgetsByCollection.sql" />
+    <Build Include="Programmability\budget\stp_UpdateBudget.sql" />
+    <Build Include="Programmability\budget\stp_DeleteBudget.sql" />
+    <Build Include="Programmability\budget\stp_CreateBudgetItem.sql" />
+    <Build Include="Programmability\budget\stp_GetBudgetItemById.sql" />
+    <Build Include="Programmability\budget\stp_GetBudgetItemsByBudget.sql" />
+    <Build Include="Programmability\budget\stp_UpdateBudgetItem.sql" />
+    <Build Include="Programmability\budget\stp_DeleteBudgetItem.sql" />
+    <Build Include="Programmability\budget\stp_CreateRecurringItem.sql" />
+    <Build Include="Programmability\budget\stp_GetRecurringItemById.sql" />
+    <Build Include="Programmability\budget\stp_GetRecurringItemsByCollection.sql" />
+    <Build Include="Programmability\budget\stp_UpdateRecurringItem.sql" />
+    <Build Include="Programmability\budget\stp_DeleteRecurringItem.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
