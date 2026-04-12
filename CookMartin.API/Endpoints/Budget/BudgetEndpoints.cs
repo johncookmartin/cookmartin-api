@@ -64,9 +64,9 @@ public static class BudgetEndpoints
 
                 var dto = new CreateBudgetDto
                 {
-                    CollectionId   = collectionId,
-                    Name           = request.Name,
-                    Type           = request.Type,
+                    CollectionId = collectionId,
+                    Name = request.Name,
+                    Type = request.Type,
                     StartingAmount = request.StartingAmount
                 };
 
@@ -136,9 +136,9 @@ public static class BudgetEndpoints
 
                 var dto = new UpdateBudgetDto
                 {
-                    BudgetId       = id,
-                    Name           = request.Name,
-                    Type           = request.Type,
+                    BudgetId = id,
+                    Name = request.Name,
+                    Type = request.Type,
                     StartingAmount = request.StartingAmount
                 };
 

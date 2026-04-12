@@ -21,7 +21,7 @@ public class RecurringItemRepository : IRecurringItemRepository
         parameters.Add("@UserId",          dto.UserId);
         parameters.Add("@Label",           dto.Label);
         parameters.Add("@Amount",          dto.Amount);
-        parameters.Add("@Type",            dto.Type);
+        parameters.Add("@Type",            dto.Type.ToString());
         parameters.Add("@IsShared",        dto.IsShared);
         parameters.Add("@RecurringItemId", dbType: System.Data.DbType.Int32, direction: System.Data.ParameterDirection.Output);
 
@@ -55,7 +55,7 @@ public class RecurringItemRepository : IRecurringItemRepository
                 RecurringItemId = dto.RecurringItemId,
                 Label           = dto.Label,
                 Amount          = dto.Amount,
-                Type            = dto.Type,
+                Type            = dto.Type.ToString(),
                 IsShared        = dto.IsShared
             });
 

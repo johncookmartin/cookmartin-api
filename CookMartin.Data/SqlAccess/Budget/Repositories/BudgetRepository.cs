@@ -19,7 +19,7 @@ public class BudgetRepository : IBudgetRepository
         var parameters = new DynamicParameters();
         parameters.Add("@CollectionId",   dto.CollectionId);
         parameters.Add("@Name",           dto.Name);
-        parameters.Add("@Type",           dto.Type);
+        parameters.Add("@Type",           dto.Type.ToString());
         parameters.Add("@StartingAmount", dto.StartingAmount);
         parameters.Add("@BudgetId",       dbType: System.Data.DbType.Int32, direction: System.Data.ParameterDirection.Output);
 
@@ -52,7 +52,7 @@ public class BudgetRepository : IBudgetRepository
             {
                 BudgetId       = dto.BudgetId,
                 Name           = dto.Name,
-                Type           = dto.Type,
+                Type           = dto.Type.ToString(),
                 StartingAmount = dto.StartingAmount
             });
 

@@ -7,15 +7,17 @@ using CookMartin.Oscar;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Identity.Web;
 using Microsoft.OpenApi;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.ConfigureHttpJsonOptions(options =>
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
 
 builder.Services.AddAuthorization();
-builder.Services.AddControllers();
-
 builder.Services.AddDbService();
 builder.Services.AddNoteCardServices();
 builder.Services.AddOscarServices();
@@ -79,7 +81,5 @@ app.MapGet("/health", () => Results.Ok(new { ok = true, message = "API is health
     .WithTags("Health")
     .AllowAnonymous();
 app.MapAllEndpoints();
-
-app.MapControllers();
 
 app.Run();

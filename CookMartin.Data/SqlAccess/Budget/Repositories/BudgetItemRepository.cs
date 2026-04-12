@@ -22,7 +22,7 @@ public class BudgetItemRepository : IBudgetItemRepository
         parameters.Add("@Label",          dto.Label);
         parameters.Add("@BudgetedAmount", dto.BudgetedAmount);
         parameters.Add("@DueDate",        dto.DueDate);
-        parameters.Add("@Type",           dto.Type);
+        parameters.Add("@Type",           dto.Type.ToString());
         parameters.Add("@BudgetItemId",   dbType: System.Data.DbType.Int32, direction: System.Data.ParameterDirection.Output);
 
         await writeDb.QueryAsync<dynamic, DynamicParameters>("budget.stp_CreateBudgetItem", parameters);
@@ -58,7 +58,7 @@ public class BudgetItemRepository : IBudgetItemRepository
                 DueDate        = dto.DueDate,
                 ActualAmount   = dto.ActualAmount,
                 ActualDate     = dto.ActualDate,
-                Type           = dto.Type
+                Type           = dto.Type.ToString()
             });
 
         return result.FirstOrDefault()?.RowsAffected ?? 0;
