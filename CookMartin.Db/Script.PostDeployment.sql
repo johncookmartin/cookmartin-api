@@ -5,4 +5,5 @@
 */
 
 :r .\seed_oscar_2026.sql
+:r .\seed_portfolio_employment_types.sql
 :r .\grant_schema_execute.sql
