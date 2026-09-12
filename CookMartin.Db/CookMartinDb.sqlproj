@@ -81,6 +81,7 @@
     <Build Include="Tables\portfolio.Profiles.sql" />
     <Build Include="Tables\portfolio.WorkHistory.sql" />
     <Build Include="Tables\portfolio.WorkHistoryBullets.sql" />
+    <Build Include="Tables\portfolio.Skills.sql" />
     <Build Include="Programmability\oscar\stp_GetCategoriesWithNominees.sql" />
     <Build Include="Programmability\oscar\stp_UpsertPick.sql" />
     <Build Include="Programmability\oscar\stp_SetWinner.sql" />
@@ -102,6 +103,10 @@
     <Build Include="Programmability\portfolio\stp_UpdateWorkHistoryBullet.sql" />
     <Build Include="Programmability\portfolio\stp_DeleteWorkHistoryBullet.sql" />
     <Build Include="Programmability\portfolio\stp_GetWorkHistoryBulletsByWorkHistory.sql" />
+    <Build Include="Programmability\portfolio\stp_CreateSkill.sql" />
+    <Build Include="Programmability\portfolio\stp_UpdateSkill.sql" />
+    <Build Include="Programmability\portfolio\stp_DeleteSkill.sql" />
+    <Build Include="Programmability\portfolio\stp_GetSkillsByProfile.sql" />
     <Build Include="Tables\note.Collections.sql" />
     <Build Include="Tables\note.Notecards.sql" />
     <Build Include="Tables\note.QuizInstances.sql" />
