@@ -75,6 +75,12 @@ UPDATE/DELETE procedures return `RowsAffected` as a scalar or result set.
 
 `seed_oscar_2026.sql` seeds the 98th Academy Awards nominees across 24 categories. Run manually or included in the post-deployment script.
 
+## Portfolio Schema Constraints
+
+`portfolio.EmploymentTypes` is extensible data, not a fixed enum. New values can be added via plain `INSERT`; C# code must read the list dynamically via `portfolio.stp_GetEmploymentTypes`, never hardcode seeded values.
+
+`portfolio.Profiles.Slug` is permanent after creation. No stored procedure in this schema writes `Slug` post-creation, and none should be added. Slug is a public identifier meant to survive profile renames.
+
 ## NoteCardDb
 
 A secondary SSDT project at the solution root (`NoteCardDb/`). Likely a legacy or development database project kept separately from the main `CookMartin.Db`. Refer to its own files for schema details.

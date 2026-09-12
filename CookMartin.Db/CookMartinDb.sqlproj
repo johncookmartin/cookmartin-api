@@ -62,11 +62,13 @@
     <Folder Include="Programmability\note\" />
     <Folder Include="Programmability\oscar\" />
     <Folder Include="Programmability\budget\" />
+    <Folder Include="Programmability\portfolio\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Security\note.sql" />
     <Build Include="Security\oscar.sql" />
     <Build Include="Security\budget.sql" />
+    <Build Include="Security\portfolio.sql" />
     <Build Include="Tables\budget.Collections.sql" />
     <Build Include="Tables\budget.CollectionUsers.sql" />
     <Build Include="Tables\budget.Budgets.sql" />
@@ -75,6 +77,12 @@
     <Build Include="Tables\oscar.Categories.sql" />
     <Build Include="Tables\oscar.Nominees.sql" />
     <Build Include="Tables\oscar.Picks.sql" />
+    <Build Include="Tables\portfolio.EmploymentTypes.sql" />
+    <Build Include="Tables\portfolio.Profiles.sql" />
+    <Build Include="Tables\portfolio.WorkHistory.sql" />
+    <Build Include="Tables\portfolio.WorkHistoryBullets.sql" />
+    <Build Include="Tables\portfolio.Skills.sql" />
+    <Build Include="Tables\portfolio.Links.sql" />
     <Build Include="Programmability\oscar\stp_GetCategoriesWithNominees.sql" />
     <Build Include="Programmability\oscar\stp_UpsertPick.sql" />
     <Build Include="Programmability\oscar\stp_SetWinner.sql" />
@@ -82,6 +90,28 @@
     <Build Include="Programmability\oscar\stp_GetUserResults.sql" />
     <Build Include="Programmability\oscar\stp_GetSubmissions.sql" />
     <Build Include="Programmability\oscar\stp_ClearWinner.sql" />
+    <Build Include="Programmability\portfolio\stp_GetEmploymentTypes.sql" />
+    <Build Include="Programmability\portfolio\stp_CreateProfile.sql" />
+    <Build Include="Programmability\portfolio\stp_UpdateProfile.sql" />
+    <Build Include="Programmability\portfolio\stp_GetProfileByUserId.sql" />
+    <Build Include="Programmability\portfolio\stp_GetProfileBySlug.sql" />
+    <Build Include="Programmability\portfolio\stp_SetPublishStatus.sql" />
+    <Build Include="Programmability\portfolio\stp_CreateWorkHistory.sql" />
+    <Build Include="Programmability\portfolio\stp_UpdateWorkHistory.sql" />
+    <Build Include="Programmability\portfolio\stp_DeleteWorkHistory.sql" />
+    <Build Include="Programmability\portfolio\stp_GetWorkHistoryByProfile.sql" />
+    <Build Include="Programmability\portfolio\stp_CreateWorkHistoryBullet.sql" />
+    <Build Include="Programmability\portfolio\stp_UpdateWorkHistoryBullet.sql" />
+    <Build Include="Programmability\portfolio\stp_DeleteWorkHistoryBullet.sql" />
+    <Build Include="Programmability\portfolio\stp_GetWorkHistoryBulletsByWorkHistory.sql" />
+    <Build Include="Programmability\portfolio\stp_CreateSkill.sql" />
+    <Build Include="Programmability\portfolio\stp_UpdateSkill.sql" />
+    <Build Include="Programmability\portfolio\stp_DeleteSkill.sql" />
+    <Build Include="Programmability\portfolio\stp_GetSkillsByProfile.sql" />
+    <Build Include="Programmability\portfolio\stp_CreateLink.sql" />
+    <Build Include="Programmability\portfolio\stp_UpdateLink.sql" />
+    <Build Include="Programmability\portfolio\stp_DeleteLink.sql" />
+    <Build Include="Programmability\portfolio\stp_GetLinksByProfile.sql" />
     <Build Include="Tables\note.Collections.sql" />
     <Build Include="Tables\note.Notecards.sql" />
     <Build Include="Tables\note.QuizInstances.sql" />
@@ -132,6 +162,7 @@
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
     <None Include="seed_oscar_2026.sql" />
+    <None Include="seed_portfolio_employment_types.sql" />
     <None Include="grant_schema_execute.sql" />
   </ItemGroup>
   <ItemGroup>
