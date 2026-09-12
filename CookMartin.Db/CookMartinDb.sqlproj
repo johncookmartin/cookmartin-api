@@ -78,6 +78,7 @@
     <Build Include="Tables\oscar.Nominees.sql" />
     <Build Include="Tables\oscar.Picks.sql" />
     <Build Include="Tables\portfolio.EmploymentTypes.sql" />
+    <Build Include="Tables\portfolio.Profiles.sql" />
     <Build Include="Programmability\oscar\stp_GetCategoriesWithNominees.sql" />
     <Build Include="Programmability\oscar\stp_UpsertPick.sql" />
     <Build Include="Programmability\oscar\stp_SetWinner.sql" />
@@ -86,6 +87,11 @@
     <Build Include="Programmability\oscar\stp_GetSubmissions.sql" />
     <Build Include="Programmability\oscar\stp_ClearWinner.sql" />
     <Build Include="Programmability\portfolio\stp_GetEmploymentTypes.sql" />
+    <Build Include="Programmability\portfolio\stp_CreateProfile.sql" />
+    <Build Include="Programmability\portfolio\stp_UpdateProfile.sql" />
+    <Build Include="Programmability\portfolio\stp_GetProfileByUserId.sql" />
+    <Build Include="Programmability\portfolio\stp_GetProfileBySlug.sql" />
+    <Build Include="Programmability\portfolio\stp_SetPublishStatus.sql" />
     <Build Include="Tables\note.Collections.sql" />
     <Build Include="Tables\note.Notecards.sql" />
     <Build Include="Tables\note.QuizInstances.sql" />
