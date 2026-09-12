@@ -6,7 +6,6 @@ BEGIN
 
     SELECT
         [ProfileId],
-        [UserId],
         [Name],
         [Headline],
         [Bio],
